@@ -14,6 +14,14 @@ contract SampleTactContract with Deployable {
         self.counter = 0;
     }
 
+    receive(msg: Add) {
+        self.add(msg.amount);
+    }
+
+    receive("increment") {
+        self.add(1);
+    }
+
     fun add(v: Int) {
         
         // Check sender
@@ -22,14 +30,6 @@ contract SampleTactContract with Deployable {
         
         // Update counter
         self.counter = (self.counter + v);
-    }
-
-    receive(msg: Add) {
-        self.add(msg.amount);
-    }
-
-    receive("increment") {
-        self.add(1);
     }
 
     get fun counter(): Int {
